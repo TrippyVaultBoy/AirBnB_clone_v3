@@ -80,7 +80,6 @@ class DBStorage:
         on the class and its ID, or None if not found"""
         pass
 
-
     def count(self, cls=None):
         """A method to count the number of objects in storage. Returns the
         number of objects in storage matching the given class. If no class
