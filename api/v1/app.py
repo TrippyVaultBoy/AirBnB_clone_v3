@@ -14,6 +14,11 @@ def close_storage(exception):
     """handles @app.teardown_appcontext"""
     storage.close()
 
+@app.errorhandler(404)
+def not_found(error):
+    """Return a 404 error message"""
+    return jsnoify({"error": "Not found"}), 4404
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000", threaded=True)
