@@ -14,6 +14,7 @@ def close_storage(exception):
     """handles @app.teardown_appcontext"""
     storage.close()
 
+
 @app.errorhandler(404)
 def not_found(error):
     """Return a 404 error message"""
