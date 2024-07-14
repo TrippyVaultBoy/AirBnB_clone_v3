@@ -6,16 +6,24 @@ from models import storage
 from models.state import State
 
 
-@app_views.route('/states', methods=['GET', 'POST'], strict_slashes=False)
-def get_states(state_id):
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
+def get_states():
     """Retrieves a state object"""
+    state = storage.all(State)
+    state is None:
+    return jsonify([state.to_dict() for state in states.values()])
+
+
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
+def get_state(state_id):
+    """Retrieves a State object."""
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
     return jsonify(state.to_dict())
 
 
-@app_views.route('/states/<state_id>', methods=['GET', 'DELETE', 'PUT'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
 def delete_state(state_id):
     """Deletes a State object."""
     state = storage.get(State, state_id)
