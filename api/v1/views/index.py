@@ -9,6 +9,9 @@ from models.place import Place
 from models.review import Review
 from models.amenity import Amenity
 from models.user import User
+from flask import Blueprint
+
+app_views = Blueprint("app_views", __name__, url_prefix="/api/v1")
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status_OK():
