@@ -13,6 +13,7 @@ from flask import Blueprint
 
 app_views = Blueprint("app_views", __name__, url_prefix="/api/v1")
 
+
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status_OK():
     """returns a JSON status"""
@@ -28,5 +29,5 @@ def stats():
                 "reviews": storage.count("Review"),
                 "states": storage.count("State"),
                 "users": storage.count("User")}
-    
+
     return jsonify(obj_json)
