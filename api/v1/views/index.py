@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """creates a route to status"""
 from api.v1.views import app_views
-from flask import Flask, jsonify
+from flask import Blueprint, jsonify
 from models import storage
 from models.state import State
 from models.city import City
@@ -9,6 +9,10 @@ from models.place import Place
 from models.review import Review
 from models.amenity import Amenity
 from models.user import User
+
+
+app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
+
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status_OK():
