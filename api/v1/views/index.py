@@ -2,8 +2,8 @@
 """creates a route to status"""
 from api.v1.views import app_views
 from flask import Flask, jsonify
+import requests
 from models import storage
-
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status_OK():
