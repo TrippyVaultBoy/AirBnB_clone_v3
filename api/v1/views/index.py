@@ -11,12 +11,12 @@ def status_OK():
     return jsonify({"status": "OK", "code": 200}), 200
 
 
-@app_views.route("/api/v1/stats")
+@app_views.route("/stats", methods=['GET'], strict_slashes=False)
 def stats():
     """endpoint that retrieves the number of each objects by type"""
-    return jsonify({"Amenities": storage.count("Amenity"),
-                    "Cities": storage.count("City"),
-                    "Places": storage.count("Place"),
-                    "Reviews": storage.count("Review"),
-                    "States": storage.count("State"),
-                    "Users": storage.count("User")})
+    return jsonify({"amenities": storage.count("Amenity"),
+                    "cities": storage.count("City"),
+                    "places": storage.count("Place"),
+                    "reviews": storage.count("Review"),
+                    "states": storage.count("State"),
+                    "users": storage.count("User")})
