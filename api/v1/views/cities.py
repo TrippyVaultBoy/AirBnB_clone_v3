@@ -13,8 +13,8 @@ def get_cities_by_state(state_id):
     state = storage.get(State, state_id)
     if not state:
         abort(404)
-    cities = [city.to_dict() for city in state.cities]
-    return jsonify(cities)
+    cities = [city.name for city in state.cities]
+    return jsonify(cities), 200
 
 
 @app_views.route('/api/v1/cities/<city_id>', methods=['GET'], strict_slashes=False)
@@ -23,7 +23,7 @@ def get_city(city_id):
     city = storage.get(City, city_id)
     if not city:
         abort(404)
-    return jsonify(city.to_dict())
+    return jsonify(city.to_dict()), 200
 
 
 @app_views.route('/api/v1/cities/<city_id>', methods=['DELETE'], strict_slashes=False)
@@ -43,9 +43,10 @@ def create_city(state_id):
     state = storage.get(State, state_id)
     if not state:
         abort(404)
-    if not request.get_json():
+    data = request.get_json():
+    if not data:
         abort(400, 'Not a JSON')
-    if 'name' not in request.get_json():
+    if 'name' not in data:
         abort(400, 'Missing name')
 
     city = City(name=request.json['name'], state_id=state_id)
