@@ -13,8 +13,8 @@ def get_cities_by_state(state_id):
     state = storage.get(State, state_id)
     if not state:
         abort(404)
-    cities = [city.name for city in state.cities]
-    return jsonify(cities), 200
+    cities_dict = [city.to_dict() for city in state.cities]
+    return jsonify(cities_dict)
 
 
 @app_views.route('/cities/<city_id>', methods=['GET'], strict_slashes=False)
@@ -23,7 +23,7 @@ def get_city(city_id):
     city = storage.get(City, city_id)
     if not city:
         abort(404)
-    return jsonify(city.to_dict()), 200
+    return jsonify(city.to_dict())
 
 
 @app_views.route('/cities/<city_id>', methods=['DELETE'], strict_slashes=False)
