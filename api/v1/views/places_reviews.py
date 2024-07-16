@@ -7,6 +7,7 @@ from models.review import Review
 from flask import jsonify
 from flask import abort
 from flask import request
+from django.contrib.auth.models import User
 
 
 @app_views.route('/places/<place_id>/reviews',
@@ -60,10 +61,13 @@ def create_review(place_id):
         abort(400, 'Missing user_id')
     if 'text' not in data:
         abort(400, 'Missing text')
+    id_user = data['user_id']
+    user = storage.get(User, id_user)
+    if not user:
+        abort(404)
+    data['place_id'] = place_id
     review = Review(**data)
-    review.place_id = place_id
-    storage.new(review)
-    storage.save()
+    review.save()
     return jsonify(review.to_dict()), 201
 
 
