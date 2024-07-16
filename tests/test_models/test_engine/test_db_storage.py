@@ -13,7 +13,6 @@ from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
-from models import storage
 from models.user import User
 import json
 import os
@@ -73,15 +72,10 @@ class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_all_returns_dict(self):
-
-class TestDBStorage(unittest.TestCase):
-    def test_get(self):
-        state = State(name="Test")
-        state.save()
-        self.assertEqual(storage.get(State, state.id), state)
-        """Test that all returns a dictionaty"""
+    
+        """Test that all returns a dictionary"""
         self.assertIs(type(models.storage.all()), dict)
-
+        
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_all_no_class(self):
         """Test that all returns all rows when no class is passed"""
