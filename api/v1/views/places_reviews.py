@@ -7,7 +7,6 @@ from models.review import Review
 from flask import jsonify
 from flask import abort
 from flask import request
-from django.contrib.auth.models import User
 
 
 @app_views.route('/places/<place_id>/reviews',
