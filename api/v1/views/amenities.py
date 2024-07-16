@@ -7,12 +7,14 @@ from flask import jsonify
 from flask import abort
 from flask import request
 
+
 @app_views.route('/amenities',
            methods=['GET'],
            strict_slashes=False)
 def get_amenities():
     """Retrieves the list of all Amenity objects."""
     return jsonify([amenity.to_dict() for amenity in storage.all(Amenity).values()])
+
 
 @app_views.route('/amenities/<amenity_id>',
                  methods=['GET'],
@@ -24,7 +26,8 @@ def get_amenity(amenity_id):
         abort(404)
     else:
         return jsonify(amenity.to_dict())
-    
+
+
 @app_views.route('/amenities/<amenity_id>',
                  methods=['DELETE'],
                  strict_slashes=False)
@@ -36,6 +39,7 @@ def delete_amenity(amenity_id):
     storage.delete(amenity)
     storage.save()
     return jsonify({}), 200
+
 
 @app_views.route('/amenities',
                  methods=['POST'],
@@ -51,6 +55,7 @@ def create_amenity():
     storage.new(amenity)
     storage.save()
     return jsonify(amenity.to_dict()), 201
+
 
 @app_views.route('/amenities/<amenity_id>',
                  methods=['PUT'],
