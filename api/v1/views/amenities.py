@@ -12,11 +12,8 @@ from flask import request
            strict_slashes=False)
 def get_amenities():
     """Retrieves the list of all Amenity objects."""
-    amenities = storage.all(Amenity).values()
-    amenities_list = []
-    for amenity in amenities:
-        amenities_list.append(amenity.to_dict())
-    return jsonify(amenities_list)
+    amenities = storage.all(Amenity)
+    return jsonify([amenity.to_dict() for amenity in amenities.values()]), 200
 
 @app_views.route('/amenities/<amenity_id>',
                  methods=['GET'],
