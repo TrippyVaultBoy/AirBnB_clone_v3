@@ -15,7 +15,7 @@ from flask import Blueprint
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status_OK():
     """returns a JSON status"""
-    return jsonify({"status": "OK", "code": 200}), 200
+    return jsonify({"status": "OK"})
 
 
 @app_views.route("/stats", methods=['GET'], strict_slashes=False)
