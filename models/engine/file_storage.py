@@ -73,3 +73,8 @@ class FileStorage:
         """retrieve one object. Returns the object based
         on the class and its ID, or None if not found"""
         pass
+
+
+    def count(self, cls=None):
+        """Counts number of specified objects in storage"""
+        pass
