@@ -23,11 +23,11 @@ def status_OK():
 @app_views.route("/stats", methods=['GET'], strict_slashes=False)
 def stats():
     """endpoint that retrieves the number of each objects by type"""
-    obj_json = (amenities=storage.count("Amenity") or 0,
-                cities=storage.count("City") or 0,
-                places=storage.count("Place") or 0,
-                reviews=storage.count("Review") or 0,
-                states=storage.count("State") or 0,
-                users=storage.count("User") or 0)
+    obj_json = {"amenities": storage.count("Amenity"),
+                "cities": storage.count("City"),
+                "places": storage.count("Place"),
+                "reviews": storage.count("Review"),
+                "states": storage.count("State",
+                "users": storage.count("User")}
 
     return jsonify(obj_json)
